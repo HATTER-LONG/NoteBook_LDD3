@@ -1,1 +1,1 @@
-LDD3  notboot with picture
+LDD3  notebook with picture
