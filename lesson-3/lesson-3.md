@@ -396,7 +396,7 @@ unsigned long copy_from_user(void *to,const void __user *from,unsigned long coun
 -  这两个函数的作用并不限于拷贝数据，他们还检查用户空间的指针是否有效。如果指针无效，就不会进行拷贝；另一方面，拷贝过程中遇到无效地址，则仅仅会拷贝部分数据。这样就需要检查每次拷贝的返回值（拷贝的数据长度）。如果不需要检查用户指针，那么可以调用`__copy_to_user` 和 `__copy_from_user`，使用时请小心。
 - 无论使用这方法传输了多少数据，一般都要更新`*offp`所表示的文件位置，以便反应在新的系统调用成功完成之后当前的文件位置。正常情况，内核会将文件位置的改变传回 file 结构。注意 pread 和 pwrite 会从一个给定的偏移量开始操作，完成后不会改变文件位置，同时会丢弃驱动所做的任何修改。
 
-<img src="https://raw.githubusercontent.com/HATTER-LONG/LDD3_readnote_picture/master/lesson-3/picture_5.png" width = "900" height = "400" alt="picture_1" align=center />
+<img src="https://raw.githubusercontent.com/HATTER-LONG/LDD3_readnote_picture/master/lesson-3/picture_5.png" width = "700" height = "400" alt="picture_1" align=center />
 
 
 ####read方法*（The read Method）*
