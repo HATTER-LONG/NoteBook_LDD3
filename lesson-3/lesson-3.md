@@ -52,7 +52,7 @@ void unregister_chrdev_region(dev_t first, unsigned int count);
 - 动态分配的缺点：
     - 由于分配的主设备号不能始终保持一致，所以无法预先创建设备节点，但是 一旦分配了设备号就可以在`/proc/devices`中读取到。
     - 一般在加载这种驱动模块都是使用的脚本，在加载后读取`devices`文件拿到主设备号，创建设备节点。
-<img src="https://raw.githubusercontent.com/HATTER-LONG/LDD3_readnote_picture/master/lesson-3/picture_1.png" width = "200" height = "800" alt="picture_1" align=center />
+<img src="https://raw.githubusercontent.com/HATTER-LONG/LDD3_readnote_picture/master/lesson-3/picture_1.png" width = "300" height = "600" alt="picture_1" align=center />
 
 ```shell
 #!/bin/sh
