@@ -59,13 +59,13 @@ module_exit(hello_exit);
 > Current.h (*kernel_3.0\arch\arm\include\asm)路径
 
 
- <img src="https://raw.githubusercontent.com/HATTER-LONG/LDD3_readnote_picture/master/lesson-2/picture_2.png" width = "800" height = "500" alt="picture" align=center />
-<img src="https://raw.githubusercontent.com/HATTER-LONG/LDD3_readnote_picture/master/lesson-2/picture_3.png" width = "800" height = "500" alt="picture" align=center />
+ <img src="https://raw.githubusercontent.com/HATTER-LONG/LDD3_readnote_picture/master/lesson-2/picture_2.png" width = "900" height = "400" alt="picture" align=center />
+<img src="https://raw.githubusercontent.com/HATTER-LONG/LDD3_readnote_picture/master/lesson-2/picture_3.png" width = "900" height = "400" alt="picture" align=center />
 
 [thread_info信息](http://blog.jobbole.com/107656/)
 
 
-<img src="https://raw.githubusercontent.com/HATTER-LONG/LDD3_readnote_picture/master/lesson-2/picture_4.png" width = "800" height = "500" alt="picture" align=center />
+<img src="https://raw.githubusercontent.com/HATTER-LONG/LDD3_readnote_picture/master/lesson-2/picture_4.png" width = "900" height = "400" alt="picture" align=center />
 
 - 当 open、read 等系统调用的执行过程中，当前进程指的是调用这些系统调用的进程。
 - 一种不依赖于特定架构的机制通常是，将指向 `task_struct` 结构的指针隐藏在内核栈中。这种实现的细节同样也对其他内核子系统隐藏，驱动程序在包含头文件的情况下就能直接调用 。
@@ -148,7 +148,7 @@ Error inserting './hello.ko': -1 Invalid module format
 - 新模块可以使用由我们**自己的模块**导出的符号，这样，我们可以在其他模块上层叠新的模块。模块层叠技术也使用在很多主流的内核源代码中。例如msdos 文件系统依赖于由 fat 模块导出的符号；而每个USB输入设备模块层叠在 usbcore 和 input 模块之上。
     - `modprobe` 是处理堆叠模块的一个工具，他可以自动装入指定模块依赖的其他模块，相当于操作 insmod 的多次操作。
 
-<img src="https://raw.githubusercontent.com/HATTER-LONG/LDD3_readnote_picture/master/lesson-2/picture_6.png" width = "800" height = "500" alt="picture" align=center />
+<img src="https://raw.githubusercontent.com/HATTER-LONG/LDD3_readnote_picture/master/lesson-2/picture_6.png" width = "900" height = "500" alt="picture" align=center />
 - 通过堆叠可以将模块划分成多个层，通过简化每个层缩短开发时间。Linux 内核头文件提供了一个方便的方法来管理符号对模块外部的可见性，从而减少了可能造成的名字空间污染（名字空间中的名称可能会和内核其他地方定义的名称发生冲突），并且适当隐藏信息。如果一个模块需要向其他模块导出符号，则应该使用下面的宏：
 ```c
 EXPORT_SYMBOL(name)；
