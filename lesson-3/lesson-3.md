@@ -163,7 +163,7 @@ struct file_operations scull_fops = {
     - 文件描述符(fd)：`fd`只是一个小整数，在`open`时产生。起到一个索引的作用，内核会在每个进程空间中（PCB（Process Control Block）进程控制块）维护一个文件描述符表，进程通过`PCB`中的文件描述符表找到该`fd`所指向的文件指针`filp`。
 > 每个进程在PCB（Process Control Block）即进程控制块中都保存着一份文件描述符表，文件描述符就是这个表的索引，文件描述表中每个表项都有一个指向已打开文件的指针。
 ([图片引用链接](http://www.cnblogs.com/hanxiaoyu/p/5677677.html))
-<img src="https://raw.githubusercontent.com/HATTER-LONG/LDD3_readnote_picture/master/lesson-3/picture_7.png" width = "900" height = "400" alt="picture_1" align=center />
+<img src="https://raw.githubusercontent.com/HATTER-LONG/LDD3_readnote_picture/master/lesson-3/picture_7.png" width = "700" height = "400" alt="picture_1" align=center />
 
 - `file`结构中有一个重要成员：
     - `struct file_operations *f_op;`
