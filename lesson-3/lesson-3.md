@@ -172,7 +172,7 @@ struct file_operations scull_fops = {
 ####inode 结构*（The inode Structure）*
 - 内核用` inode` 结构在内部表示文件，因此他和 `file` 结构不同，后者表示打开的文件描述符。对单个文件，可能会有许多个表示打开的文件描述符的 `file` 结构，但是他们都只想单个的 `inode` 结构。
 - 类似 APUE 中第二版第三章图（第三版是 3-8 图）
-<img src="https://raw.githubusercontent.com/HATTER-LONG/LDD3_readnote_picture/master/lesson-3/picture_2.png" width = "900" height = "400" alt="picture_1" align=center />
+<img src="https://raw.githubusercontent.com/HATTER-LONG/LDD3_readnote_picture/master/lesson-3/picture_2.png" width = "700" height = "400" alt="picture_1" align=center />
 图中`V`节点包含着`Inode`结构，而文件表就是`filp`啦。
 
 - inode 结构中包含大量的文件信息。最为常规，只有下面的两个字段对编写驱动有用：
