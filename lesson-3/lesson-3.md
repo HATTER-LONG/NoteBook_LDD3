@@ -345,7 +345,7 @@ void kfree(void *ptr);
 ```
 - 在 scull 中，每个设备都有一个指针链表，每个指针都指向一个 `scull_qset`。默认情况下，每一个这样的结构通过**一个中间指针**数组最多可引用 `4000000 `个字节。我们发布的源码中使用了 `1000` 个指针的数组，每个指针指向 `4000 `字节区域。每个内存区称为**量子**，而这个指针数组称为**量子集**。平均每 4M 对应一个链表元素。
 
-<img src="https://raw.githubusercontent.com/HATTER-LONG/LDD3_readnote_picture/master/lesson-3/picture_4.1.png" width = "900" height = "400" alt="picture_1" align=center />
+<img src="https://raw.githubusercontent.com/HATTER-LONG/LDD3_readnote_picture/master/lesson-3/picture_4.1.png" width = "700" height = "400" alt="picture_1" align=center />
 
 - 而为量子和量子集选择合适的数值是一个策略问题，如何使用该设备。用户可以通过几种方式修改这些值：在编译时，可以修改 `scull.h` 中的宏定义`SCULL_QUANTUM`和`SCULL_QSET`；而在模块加载时，可以设置 `scull_quantum` 和 `scull_qset` 的整数值；或者在运行时通过 `ioctl `修改。余下的问题就是如何选择默认数值，要在量子和量子集大小与kmalloc系统开销之间寻找**平衡点**。
 
