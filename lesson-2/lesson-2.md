@@ -59,13 +59,13 @@ module_exit(hello_exit);
 > Current.h (*kernel_3.0\arch\arm\include\asm)路径
 
 
- <img src="https://raw.githubusercontent.com/HATTER-LONG/LDD3_readnote_picture/master/lesson-2/picture_2.png" width = "900" height = "400" alt="picture" align=center />
-<img src="https://raw.githubusercontent.com/HATTER-LONG/LDD3_readnote_picture/master/lesson-2/picture_3.png" width = "900" height = "400" alt="picture" align=center />
+ <img src="https://raw.githubusercontent.com/HATTER-LONG/LDD3_readnote_picture/master/lesson-2/picture_2.png" width = "1000" height = "300" alt="picture" align=center />
+<img src="https://raw.githubusercontent.com/HATTER-LONG/LDD3_readnote_picture/master/lesson-2/picture_3.png" width = "1000" height = "300" alt="picture" align=center />
 
 [thread_info信息](http://blog.jobbole.com/107656/)
 
 
-<img src="https://raw.githubusercontent.com/HATTER-LONG/LDD3_readnote_picture/master/lesson-2/picture_4.png" width = "900" height = "400" alt="picture" align=center />
+<img src="https://raw.githubusercontent.com/HATTER-LONG/LDD3_readnote_picture/master/lesson-2/picture_4.png" width = "1000" height = "300" alt="picture" align=center />
 
 - 当 open、read 等系统调用的执行过程中，当前进程指的是调用这些系统调用的进程。
 - 一种不依赖于特定架构的机制通常是，将指向 `task_struct` 结构的指针隐藏在内核栈中。这种实现的细节同样也对其他内核子系统隐藏，驱动程序在包含头文件的情况下就能直接调用 。
