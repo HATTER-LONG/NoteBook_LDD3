@@ -63,9 +63,13 @@ module_exit(hello_exit);
 > Current.h (*kernel_3.0\arch\arm\include\asm)路径
 
 <img src="https://raw.githubusercontent.com/HATTER-LONG/LDD3_readnote_picture/master/lesson-2/picture_2.png" width = "1000" height = "230" alt="picture1" align=center />
+
 ----------------------
+
 <img src="https://raw.githubusercontent.com/HATTER-LONG/LDD3_readnote_picture/master/lesson-2/picture_3.png" width = "1000" height = "230" alt="picture2" align=center />
--------------------------------
+
+----------------------
+
 <img src="https://raw.githubusercontent.com/HATTER-LONG/LDD3_readnote_picture/master/lesson-2/picture_4.png" width = "1000" height = "230" alt="picture3" align=center />
 
 - 当 open、read 等系统调用的执行过程中，当前进程指的是调用这些系统调用的进程。
@@ -199,7 +203,7 @@ static int __init initialization_function(void)
 module_init(initialization_function);
 ```
 
-- 首先是声明为 `static`，因为他除了初始化不会被其他调用，但这不是必须的，因为要对内核其他部分可见首先要导出。`_ _init` 标记是对内核的一种暗示，说明该函数仅仅在初始化阶段使用。再装载完成后就会将初始化函数释放掉。 
+- 首先是声明为 `static`，因为他除了初始化不会被其他调用，但这不是必须的，因为要对内核其他部分可见首先要导出。`_ _init` 标记是对内核的一种暗示，说明该函数仅仅在初始化阶段使用。再装载完成后就会将初始化函数释放掉。
 
 - `module_init` 是强制的，用来说明内核初始化函数所在的位置。
 
