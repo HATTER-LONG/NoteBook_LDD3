@@ -70,7 +70,7 @@ void unregister_chrdev_region(dev_t first, unsigned int count);
   - 由于分配的主设备号不能始终保持一致，所以无法预先创建设备节点，但是 一旦分配了设备号就可以在`/proc/devices`中读取到。
   - 一般在加载这种驱动模块都是使用的脚本，在加载后读取`devices`文件拿到主设备号，创建设备节点。
 
-<img src="https://raw.githubusercontent.com/HATTER-LONG/LDD3_readnote_picture/master/lesson-3/picture_1.png" width = "300" height = "600" alt="picture_1" align=center />
+![Ref1](./pic/picture_1.png)
 
 ```shell
 #!/bin/sh
@@ -188,7 +188,7 @@ struct file_operations scull_fops = {
   > 每个进程在PCB（Process Control Block）即进程控制块中都保存着一份文件描述符表，文件描述符就是这个表的索引，文件描述表中每个表项都有一个指向已打开文件的指针。
 ([图片引用链接](http://www.cnblogs.com/hanxiaoyu/p/5677677.html))
 
-<img src="https://raw.githubusercontent.com/HATTER-LONG/LDD3_readnote_picture/master/lesson-3/picture_7.png" width = "700" height = "400" alt="picture_1" align=center />
+![Ref2](./pic/picture_7.png)
 
 - `file`结构中有一个重要成员：
   - `struct file_operations *f_op;`
@@ -199,7 +199,7 @@ struct file_operations scull_fops = {
 - 内核用`inode` 结构在内部表示文件，因此他和 `file` 结构不同，后者表示打开的文件描述符。对单个文件，可能会有许多个表示打开的文件描述符的 `file` 结构，但是他们都只想单个的 `inode` 结构。
 - 类似 APUE 中第二版第三章图（第三版是 3-8 图），图中`V`节点包含着`Inode`结构，而文件表就是`filp`啦。
 
-<img src="https://raw.githubusercontent.com/HATTER-LONG/LDD3_readnote_picture/master/lesson-3/picture_2.png" width = "700" height = "400" alt="picture_1" align=center />
+![Ref3](./pic/picture_2.png)
 
 - inode 结构中包含大量的文件信息。最为常规，只有下面的两个字段对编写驱动有用：
 
@@ -340,7 +340,7 @@ container_of(ptr, type, member);
 
 - 根据"结构体`(type)`变量"中的"域成员变量`(member)`的指针`(ptr)`"来获取指向整个结构体变量的指针。
 
-<img src="https://raw.githubusercontent.com/HATTER-LONG/LDD3_readnote_picture/master/lesson-3/picture_3.jpg" width = "300" height = "300" alt="picture_1" align=center />
+![Ref4](./pic/picture_3.png)
 
 - 在`scull_dev`中，这个宏用来找到适当的设备结构：
 
@@ -399,7 +399,7 @@ void kfree(void *ptr);
 
 - 在 scull 中，每个设备都有一个指针链表，每个指针都指向一个 `scull_qset`。默认情况下，每一个这样的结构通过**一个中间指针**数组最多可引用 `4000000` 个字节。我们发布的源码中使用了 `1000` 个指针的数组，每个指针指向 `4000` 字节区域。每个内存区称为**量子**，而这个指针数组称为**量子集**。平均每 4M 对应一个链表元素。
 
-<img src="https://raw.githubusercontent.com/HATTER-LONG/LDD3_readnote_picture/master/lesson-3/picture_4.1.png" width = "700" height = "400" alt="picture_1" align=center />
+![Ref5](./pic/picture_4.1.png)
 
 - 而为量子和量子集选择合适的数值是一个策略问题，如何使用该设备。用户可以通过几种方式修改这些值：在编译时，可以修改 `scull.h` 中的宏定义`SCULL_QUANTUM`和`SCULL_QSET`；而在模块加载时，可以设置 `scull_quantum` 和 `scull_qset` 的整数值；或者在运行时通过 `ioctl`修改。余下的问题就是如何选择默认数值，要在量子和量子集大小与kmalloc系统开销之间寻找**平衡点**。
 
@@ -456,7 +456,7 @@ unsigned long copy_from_user(void *to,const void __user *from,unsigned long coun
 - 这两个函数的作用并不限于拷贝数据，他们还检查用户空间的指针是否有效。如果指针无效，就不会进行拷贝；另一方面，拷贝过程中遇到无效地址，则仅仅会拷贝部分数据。这样就需要检查每次拷贝的返回值（拷贝的数据长度）。如果不需要检查用户指针，那么可以调用`__copy_to_user` 和 `__copy_from_user`，使用时请小心。
 - 无论使用这方法传输了多少数据，一般都要更新`*offp`所表示的文件位置，以便反应在新的系统调用成功完成之后当前的文件位置。正常情况，内核会将文件位置的改变传回 file 结构。注意 pread 和 pwrite 会从一个给定的偏移量开始操作，完成后不会改变文件位置，同时会丢弃驱动所做的任何修改。
 
-<img src="https://raw.githubusercontent.com/HATTER-LONG/LDD3_readnote_picture/master/lesson-3/picture_5.png" width = "700" height = "400" alt="picture_1" align=center />
+![Ref6](./pic/picture_5.png)
 
 ### read方法 *（The read Method）*
 

@@ -24,7 +24,7 @@
      7. `KERN_INFO`：提示性消息， 很多驱动在启动时以这个级别打印它们发现的硬件的信息.
      8. `KERN_DEBUG`：用作调试消息.
 
-### 重定向到控制台*（Redirecting Console Messages）*
+### 重定向到控制台 *（Redirecting Console Messages）*
 
 - 内核可以讲消息发送到一个指定的虚拟控制台（假如控制台是文本屏幕的话）。默认情况下，**“控制台”就是当前地虚拟终端**。可以在任何一个控制台设备上调用 ioctl（TIOCLINUX），**来指定接收消息的虚拟终端**。下面的 `setconsole` 程序，可选择专门用来接收内核消息的控制台；这个程序必须由超级用户运行，在 misc-progs 目录里可以找到它。下面是程序的代码：
 
@@ -71,7 +71,7 @@ int main(int argc, char **argv)
     2. create 函数的一个主要参数就是 proc_fops 就是该文件的操作函数了，定义了如何操作文件的方式。
 - 因为 /proc 下大文件的实现有些笨拙，为了方便开发，增加了 `seq_file` 接口，这个接口为大的内核虚拟文件提供了一组更加简单的函数。因此后续的源码中 /proc 的大多是通过 seq_file 来实现的。
 
-#### 使用seq_file接口*（Using the seq_file API）*
+#### 使用seq_file接口 *（Using the seq_file API）*
 
 - `seq_file` 的实现基于 /proc 系统。要使用 seq_file，我们必须抽象出一个对象序列，然后可以依次遍历对象序列的每个成员。这个对象序列可以是链表，数组，哈希表等等。具体到scull模块，是把scull_devices 数组做为一个对象序列，每个对象就是一个 `scull_dev`  结构。
 
@@ -220,7 +220,7 @@ static struct file_operations scull_proc_ops = {
     }
 ```
 
-## 通过监视调试*（Debugging by Watching）*
+## 通过监视调试 *（Debugging by Watching）*
 
 - `strace`命令是一个功能非常强大的工具，它可以显示程序所调用的**所有**系统调用。它不仅可以显示调用，而且还能显示**调用参数**，以及用符号方式表示的**返回值**。当系统调用失败时，错误的符号值（如`ENOMEM`）和对应的字符串（如`Out of memory`）都能被显示出来。
 - strace 有许多命令行选项；

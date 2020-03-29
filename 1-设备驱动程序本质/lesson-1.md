@@ -27,7 +27,7 @@
 
 - Linux 的特性可以在运行时向内核中添加功能或是移除功能。这些功能代码被称为“模块”，我们使用 insmod 添加模块 rmmod 移除模块。内核支持多种模块如下图：
 
-<img src="https://raw.githubusercontent.com/HATTER-LONG/LDD3_readnote_picture/master/lesson-1/clipboard.png" width = "600" height = "600" alt="picture" align=center />
+![层级结构](./pic/struct.png)
 
 ## 设备和模块划分 (Classes of Devices and Modules)
 
