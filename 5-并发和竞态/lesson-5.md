@@ -223,7 +223,7 @@ ssize_t complete_write (struct file *filp, const char __user *buf, size_t count,
 }
 ```
 
-## 自旋锁*（Spinlocks）*
+## 自旋锁 *（Spinlocks）*
 
 大多数锁定通过称为**"自旋锁"**的机制实现。和信号量不同，自旋锁`可在`**不能休眠**的代码中使用，比如中断处理程序。正确使用会提供比信号量更高的性能。
 
@@ -267,7 +267,7 @@ void spin_unlock(spinlock_t *lock);
 
 - 另一个规则：自旋锁必须在可能的最短时间内拥有。自旋锁占有时间越长那么其他处理器自旋等待的时间越长，整个内核的延时就会大大增加，死锁的可能性也会增加。
 
-### 自旋函数*（The Spinlock Functions）*
+### 自旋函数 *（The Spinlock Functions）*
 
 - 自旋锁的锁定函数：
 
@@ -374,11 +374,11 @@ void write_unlock_bh(rwlock_t *lock);
 
 ## 除了锁以外的办法 *（Alternatives to Locking）*
 
-### 免锁算法*（Lock-Free Algorithms）*
+### 免锁算法 *（Lock-Free Algorithms）*
 
 ![Ref1](./pic/clipboard.png)
 
-### 原子变量*（Atomic Variables）*
+### 原子变量 *（Atomic Variables）*
 
 有时共享的资源仅仅是一个整形变量，那么在进行一些简单的操作：`n_op++；`这样也需要锁定，虽然有的处理器对于这样的处理是原子的，但是我们不能总是这么期望。但是为这么一个简单的操作来实现一套完整的锁机制，实在是浪费，因此，内核提供了一种原子整数类型，`atomic_t`，定义在 `<asm/atomic.h>`。
 
@@ -445,7 +445,7 @@ atomic_add(amount, &second_atomic);
 
 从第一个原子值中减去 amount，到还没有加到第二个时, 存在一段时间。在这个窗口时间中运行的其他代码可能会导致问题发生。
 
-### 位操作*（Bit Operations）*
+### 位操作 *（Bit Operations）*
 
 内核提供了一组用来原子修改和测试 `单个位`的函数。因为整个操作发生在单个步骤中，因此，不会受到中断或其他因素的干扰。原子位操作非常快，仅仅编译成一条指令，且不需要禁止中断。这些函数依赖于架构定义在`<asm/bitops.h>`中，不幸的是，函数使用的数据类型也是依赖于具体架构的。`nr` 参数(描述要操作哪个位)常常定义为 `int`, 但是在几个体系中是 `unsigned long`。要修改的地址常常是一个 `unsigned long`指针, 但是个别体系使用 `void *`代替。
 
